@@ -1,10 +1,34 @@
+import { useState } from "react";
+
 export default function Login() {
+  // const [enteredEmail, setEnteredEmail] = useState("");
+  // const [enteredPassword, setEnteredPassword] = useState("");
+
+  const [enteredValues, setEnteredValues] = useState({      //Generic state
+    email: "",
+    password: ""
+  });
+
   function handleSubmit(event) {
     event.preventDefault();
-    console.log("submitted");
+
+    console.log(enteredValues);
   }
 
+  function handleInputChange(identifier, value) {     //Generic event handling function
+    setEnteredValues((prevValues) => ({
+      ...prevValues,
+      [identifier]: value
+    }));
+  }
 
+  // function handleEmailChange(event) {
+  //   setEnteredEmail(event.target.value);
+  // }
+
+  // function handlePasswordChange(event) {
+  //   setEnteredEmail(event.target.value);
+  // }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -13,12 +37,24 @@ export default function Login() {
       <div className="control-row">
         <div className="control no-margin">
           <label htmlFor="email">Email</label>
-          <input id="email" type="email" name="email" />
+          <input 
+            id="email" 
+            type="email" 
+            name="email"
+            onChange={(event) => handleInputChange("email", event.target.value)}
+            value={enteredValues.email}
+          />
         </div>
 
         <div className="control no-margin">
           <label htmlFor="password">Password</label>
-          <input id="password" type="password" name="password" />
+          <input 
+            id="password" 
+            type="password" 
+            name="password" 
+            onChange={(event) => handleInputChange("password", event.target.value)}
+            value={enteredValues.password}
+          />
         </div>
       </div>
 
@@ -31,3 +67,7 @@ export default function Login() {
     </form>
   );
 }
+
+
+//on handleInputChange this ({}) tells JavaScript to immediately return an object. [] is a JS syntax
+//that helps you acces property in an object.
