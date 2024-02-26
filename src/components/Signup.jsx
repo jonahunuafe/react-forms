@@ -1,23 +1,20 @@
 import { useState } from "react";
 
-export default function Signup() {
+export default function Signup({ onOpen }) {
     const [passwordsAreNotEqual, setPasswordsAreNotEqual] = useState(false);
 
-
     function handleSubmit(event) {
-        event.preventDefault();
+      event.preventDefault();
 
-        const fd = new FormData(event.target);
-        const acquisitionChannel = fd.getAll("acquisition");   //to get checkboxes values only
-        const data = Object.fromEntries(fd.entries());
-        data.acquisition = acquisitionChannel;
-        
-        if(data.password !== data["confirm-password"]) {
-          setPasswordsAreNotEqual(true);
-          return;
-        }
-       
-        console.log(data);
+      const fd = new FormData(event.target);
+      const acquisitionChannel = fd.getAll("acquisition");
+      const data = Object.fromEntries(fd.entries());
+      data.acquisition = acquisitionChannel;
+      
+      if(data.password !== data["confirm-password"]) {
+        setPasswordsAreNotEqual(true);
+        return;
+      } 
     }
 
     return (
@@ -114,7 +111,7 @@ export default function Signup() {
           <button type="reset" className="button button-flat">
             Reset
           </button>
-          <button type="submit" className="button">
+          <button type="submit" className="button" open={onOpen}>
             Sign up
           </button>
         </p>

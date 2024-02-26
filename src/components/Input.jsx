@@ -7,6 +7,3 @@ export default function Input({ label, id, error, ...props }) {
         </div> 
     );
 }
-
-
-//type, name and value takes ...props(spreading the remaining props)
